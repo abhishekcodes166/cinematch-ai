@@ -10,6 +10,7 @@ import {
 import movieBuff from '../utiles/download (1).jpg';
 import moodWatcher from '../utiles/images (2).jpg';
 import genreExplorer from '../utiles/images (3).jpg';
+import { useNavigate } from 'react-router-dom';
 
 const FeatureCard = ({ icon, title, description }) => (
     <div className="bg-black/40 p-8 rounded-xl backdrop-blur-sm hover:transform hover:scale-105 transition-all duration-300 border border-gray-800">
@@ -33,6 +34,7 @@ const PersonaCard = ({ title, description, imageSrc }) => (
 );
 
 const AuthForm = () => {
+    const navigate = useNavigate();
     const [isSignIn, setIsSignIn] = useState(true);
     const [formData, setFormData] = useState({
         email: '',
@@ -88,9 +90,11 @@ const AuthForm = () => {
             } else if (isSignIn) {
                 await signInWithEmailAndPassword(auth, formData.email, formData.password);
                 setSuccess('Successfully signed in!');
+                navigate('/browse');
             } else {
                 await createUserWithEmailAndPassword(auth, formData.email, formData.password);
                 setSuccess('Account created successfully!');
+                navigate('/browse');
             }
         } catch (err) {
             setError(getReadableErrorMessage(err));
@@ -106,6 +110,7 @@ const AuthForm = () => {
         try {
             await signInWithPopup(auth, googleProvider);
             setSuccess('Successfully signed in with Google!');
+            navigate('/browse');
         } catch (err) {
             setError(getReadableErrorMessage(err));
         } finally {
