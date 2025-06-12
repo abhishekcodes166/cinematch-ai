@@ -10,3 +10,5 @@ browser
 gpt page    
     -suggestions
     -search bar
+
+also I have added redux store
