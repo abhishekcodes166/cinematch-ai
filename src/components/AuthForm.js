@@ -90,11 +90,11 @@ const AuthForm = () => {
             } else if (isSignIn) {
                 await signInWithEmailAndPassword(auth, formData.email, formData.password);
                 setSuccess('Successfully signed in!');
-                navigate('/browse');
+                
             } else {
                 await createUserWithEmailAndPassword(auth, formData.email, formData.password);
                 setSuccess('Account created successfully!');
-                navigate('/browse');
+                
             }
         } catch (err) {
             setError(getReadableErrorMessage(err));
@@ -110,7 +110,7 @@ const AuthForm = () => {
         try {
             await signInWithPopup(auth, googleProvider);
             setSuccess('Successfully signed in with Google!');
-            navigate('/browse');
+            
         } catch (err) {
             setError(getReadableErrorMessage(err));
         } finally {

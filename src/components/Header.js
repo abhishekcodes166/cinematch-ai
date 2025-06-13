@@ -1,22 +1,37 @@
 import React from 'react'
 import cinematchPic from '../../src/CINEMATCHPIC.png'
 import { auth } from './Firebase'
-import { signOut } from 'firebase/auth'
+import { signOut, onAuthStateChanged } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { addUser, removeUser } from '../utiles/Userslice'
 
 const Header = () => {
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
-
+  const dispatch = useDispatch();   
   const handleSignOut = async () => {
     try {
       await signOut(auth);
-      navigate('/');
     } catch (error) {
       console.error('Error signing out:', error);
     }
   };
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            const {uid, email, displayName} = user;
+            dispatch(addUser({uid:uid, email:email, displayName:displayName}));
+            navigate("/browse");
+        } else {
+            dispatch(removeUser());
+            navigate("/");
+        }
+    });
+}, []);
 
   return (
     <div className="absolute top-0 left-0 w-full z-20 bg-gradient-to-b from-black via-black/90 to-transparent pb-8">
