@@ -17,10 +17,12 @@ const Browse = () => {
   const nowPlayingMovies = useSelector((state) => state.movies.nowPlayingMovies);
   const popularMovies = useSelector((state) => state.movies.popularMovies);
   const topRatedMovies = useSelector((state) => state.movies.topRatedMovies);
-  const upcomingMovies = useSelector((state) => state.movies.upcomingMovies);
+  const upcomingMovies = useSelector((state) => state.movies.upcomingMovies); 
+
 
   // Pick the first now playing movie for the hero section
   const heroMovie = nowPlayingMovies && nowPlayingMovies.length > 0 ? nowPlayingMovies[0] : null;
+
 
   return (
     <div className="browse-bg">
