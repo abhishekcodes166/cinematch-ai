@@ -38,7 +38,7 @@ const GPTsearch = () => {
       const ai = new GoogleGenAI({ apiKey: "AIzaSyB830_p5SOgC7lWlQPaqNiBGnGL6Uir1Tw" });
       const response = await ai.models.generateContent({
         model: "gemini-2.0-flash",
-        contents: "act as a movie recommendation system and give me a movie name based on the following query: " + searchtext.current.value + ".only gives me names of 5 movie, comma seperated like the example 'movie1, movie2, movie3, movie4, movie5', ",
+        contents: "now act as a movie recommendation system and give me a movie name based on the following query: " + searchtext.current.value + ".only gives me names of 6 movie, comma seperated like the example 'movie1, movie2, movie3, movie4, movie5', ",
       });
 
       const movieTitles = response.text.split(',').map(title => title.trim());
@@ -96,7 +96,7 @@ const GPTsearch = () => {
                 className="absolute right-2 top-1/2 -translate-y-1/2 bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-md transition-colors"
                 disabled={loading}
               >
-                {loading ? "Searching..." : "Search"}
+                {loading ? "Searching...." : "Search"}
               </button>
             </div>
           </form>
